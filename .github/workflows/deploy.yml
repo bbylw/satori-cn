@@ -1,0 +1,36 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - run: bun install --frozen-lockfile
+      - run: bun run build
+      # public/ 静态资源（hb.wasm / yoga.wasm / favicon 等）复制到产物根目录，
+      # 与本地 dev server 行为一致（server.ts 将 public/ 映射到站点根路径）
+      - run: cp public/* dist/
+      # 自定义域名：GitHub Pages 需要 CNAME 文件保留域名设置
+      - run: echo "satori.ndjp.net" > dist/CNAME
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - uses: actions/deploy-pages@v4

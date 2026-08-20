@@ -1,0 +1,27 @@
+{
+  "name": "net",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --hot server.ts",
+    "build": "bun build ./index.html --outdir dist --minify",
+    "typecheck": "tsc --noEmit",
+    "lint": "oxlint"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "satori": "^0.33.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.0",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.3",
+    "oxlint": "^1.75.0",
+    "typescript": "^7.0.2"
+  },
+  "patchedDependencies": {
+    "harfbuzzjs@0.10.0": "patches/harfbuzzjs@0.10.0.patch"
+  }
+}

@@ -1,0 +1,20 @@
+diff --git a/index.js b/index.js
+index 5a1a2ab440fe73e6667b344ebf4ed259681ab1f4..167b37ab84cb73aff5d84cd329acee74e041b304 100644
+--- a/index.js
++++ b/index.js
+@@ -1,8 +1,14 @@
+ var hbjs = require('./hbjs.js');
+ var hb = require('./hb.js');
+ 
++// Browser: fetch hb.wasm from the server root (__dirname resolves to a
++// file:// path after bundling, which browsers refuse to load).
++var mod = (typeof window === 'object')
++  ? { locateFile: function (path) { return '/' + path } }
++  : {};
++
+ module.exports = new Promise(function (resolve, reject) {
+-  hb().then((instance) => {
++  hb(mod).then((instance) => {
+     resolve(hbjs(instance));
+   }, reject);
+ });
