@@ -1,6 +1,6 @@
 ![Satori](https://github.com/vercel/satori/raw/main/.github/card.png)
 
-**Satori**：将 HTML 和 CSS 转换为 SVG 的开明之库。
+**Satori**：将 HTML 与 CSS 转换为 SVG 的库。
 
 > **注意**
 >
@@ -398,7 +398,7 @@ await satori(
 
 #### Emoji
 
-要为特定的字位（grapheme）渲染自定义图片，可以使用 `graphemeImages` 选项将字位映射到图片源：
+要为特定的字素（grapheme）渲染自定义图片，可以使用 `graphemeImages` 选项将字素映射到图片源：
 
 ```jsx
 await satori(
@@ -430,7 +430,7 @@ await satori(
 
 #### 动态加载 Emoji 与字体
 
-Satori 支持动态加载 emoji 图片（字位图片）和字体。当某个文本片段被渲染但缺少图片或字体时，会调用 `loadAdditionalAsset` 函数：
+Satori 支持动态加载 emoji 图片（字素图片）和字体。当某个文本片段被渲染但缺少图片或字体时，会调用 `loadAdditionalAsset` 函数：
 
 ```jsx
 await satori(
